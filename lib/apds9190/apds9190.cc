@@ -19,6 +19,8 @@ bool APDS9190::WriteToRegister(byte data, byte reg) {
     return false;
   }
 
+  Serial.println("Transmission successful!");
+
   return true;
 
 }
@@ -36,7 +38,7 @@ uint8_t APDS9190::ReadFromRegister(byte reg) {
   Wire.beginTransmission(APDS9190_ADDRESS);  // start transmission to device
 	Wire.write(reg);  // sends registry to read from
 	if (Wire.endTransmission() != 0) {
-    Serial.println("Write registry failed");
+    Serial.println("Write register failed");
   }  // end transmission
 
 	Wire.beginTransmission(APDS9190_ADDRESS);  // start transmission to device
@@ -137,7 +139,7 @@ bool APDS9190::Init(uint8_t apds_fet) {
   byte pen = 4;  // enable proximity
   byte pon = 1;  // enable power on
   byte enable = wen | pen | pon;
-  WriteToRegister(control, APDS9190_ENABLE_REG);
+  WriteToRegister(enable, APDS9190_ENABLE_REG);
   Serial.print(F("enable: ")); Serial.println(enable);
   Serial.print(F("enable bits: ")); PrintlnBits(enable);
 

@@ -37,18 +37,18 @@ uint8_t APDS9190::ReadFromRegister(byte reg) {
 
   Wire.beginTransmission(APDS9190_ADDRESS);  // start transmission to device
 	Wire.write(reg);  // sends registry to read from
-	if (Wire.endTransmission() != 0) {
+	if (Wire.endTransmission(false) != 0) {
     Serial.println("Write register failed");
   }  // end transmission
 
-	Wire.beginTransmission(APDS9190_ADDRESS);  // start transmission to device
+	// Wire.beginTransmission(APDS9190_ADDRESS);  // start transmission to device
 	Wire.requestFrom(APDS9190_ADDRESS, 1);  // request 1 byte from the device
 
 	while (Wire.available()) {
 		data = Wire.read();  // receive a byte
 	}
 
-	Wire.endTransmission();  // end transmission
+	// Wire.endTransmission();  // end transmission
 
   return data;
 
@@ -60,7 +60,7 @@ void APDS9190::ReadWordFromRegister(byte reg) {
 	Wire.write(reg);  // sends registry to read from
 	Wire.endTransmission();  // end transmission
 
-	Wire.beginTransmission(APDS9190_ADDRESS);  // start transmission to device
+	// Wire.beginTransmission(APDS9190_ADDRESS);  // start transmission to device
 	Wire.requestFrom(APDS9190_ADDRESS, 5);  // request 1 byte from the device
 
   Serial.print("Word Read: ");
@@ -72,7 +72,7 @@ void APDS9190::ReadWordFromRegister(byte reg) {
 
   Serial.println();
 
-	Wire.endTransmission();  // end transmission
+	// Wire.endTransmission();  // end transmission
 
 }
 
@@ -85,10 +85,10 @@ uint16_t APDS9190::Proximity() {
 
   // get the low proximity bits register value
   uint8_t low = ReadFromRegister(APDS9190_PDATAL_REG);
-  Serial.print("low bits: "); Serial.println(low);
+  // Serial.print("low bits: "); Serial.println(low);
   // get the high proximity bits register value
   uint8_t high = ReadFromRegister(APDS9190_PDATAH_REG);
-  Serial.print("high bits: "); Serial.println(high);
+  // Serial.print("high bits: "); Serial.println(high);
 
   uint16_t proximity = (uint16_t)high << 8;  // shift high left by 8 bites
   proximity |= low;  // bitwise or by the lower bits
@@ -109,10 +109,7 @@ bool APDS9190::Init(uint8_t apds_fet) {
   uint8_t ptime = 0xff;  // 2.7ms - minimum proximity integration time
   uint8_t ppcount = 1;  // minimum proximity pulse count
 
-  Wire.begin();
-
-  Serial.println("Pulling APDS power fet high...");
-  digitalWrite(apds_fet, HIGH);  // power on the APDS fet
+  Wire.begin();  // join I2C as a master
 
   Serial.println(F("Setting APDS9190 registers..."));
 

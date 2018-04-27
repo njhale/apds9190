@@ -8,21 +8,21 @@
 #define APDS9190_ADDRESS 0x39
 
 // register names
-#define APDS9190_ENABLE_REG 0x00  // enable of states and interrupts
-#define APDS9190_PTIME_REG 0x02  // proximity ADC time
-#define APDS9190_WTIME_REG 0x03  // wait time
-#define APDS9190_PILTL_REG 0x08  // proximity interrupt low threshold low byte
-#define APDS9190_PILTH_REG 0x09  // proximity interrupt low threshold hi byte
-#define APDS9190_PIHTL_REG 0x0A  // proximity interrupt hi threshold low byte
-#define APDS9190_PIHTH_REG 0x0B  // proximity interrupt hi threshold hi byte
-#define APDS9190_PERS_REG 0x0C  // interrupt persistence filters
-#define APDS9190_CONFIG_REG 0x0D  // configuration
-#define APDS9190_PPCOUNT_REG 0x0E  // proximity pulse count
-#define APDS9190_CONTROL_REG 0x0F  // gain control register
-#define APDS9190_REV_REG 0x11  // revision number
-#define APDS9190_STATUS_REG 0x13  // device status
-#define APDS9190_PDATAL_REG 0x18  // proximity ADC low data register
-#define APDS9190_PDATAH_REG 0x19  // proximity ADC high data register
+#define APDS9190_ENABLE_REG (0x00 | 0x80)  // enable of states and interrupts
+#define APDS9190_PTIME_REG (0x02 | 0x80)  // proximity ADC time
+#define APDS9190_WTIME_REG (0x03 | 0x80)  // wait time
+#define APDS9190_PILTL_REG (0x08 | 0x80)  // proximity interrupt low threshold low byte
+#define APDS9190_PILTH_REG (0x09 | 0x80)  // proximity interrupt low threshold hi byte
+#define APDS9190_PIHTL_REG (0x0A | 0x80)  // proximity interrupt hi threshold low byte
+#define APDS9190_PIHTH_REG (0x0B | 0x80)  // proximity interrupt hi threshold hi byte
+#define APDS9190_PERS_REG (0x0C | 0x80)  // interrupt persistence filters
+#define APDS9190_CONFIG_REG (0x0D | 0x80)  // configuration
+#define APDS9190_PPCOUNT_REG (0x0E | 0x80)  // proximity pulse count
+#define APDS9190_CONTROL_REG (0x0F | 0x80)  // gain control register
+#define APDS9190_REV_REG (0x11 | 0x80)  // revision number
+#define APDS9190_STATUS_REG (0x13 | 0x80)  // device status
+#define APDS9190_PDATAL_REG (0x18 | 0x80)  // proximity ADC low data register
+#define APDS9190_PDATAH_REG (0x19 | 0x80)  // proximity ADC high data register
 
 
 class APDS9190 {

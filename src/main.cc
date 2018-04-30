@@ -18,7 +18,7 @@ void setup() {
 
   // instantiate and initialize the proximity sensor
   proximity_sensor = new APDS9190();
-  proximity_sensor->Init(4);  // initialize the APDS
+  proximity_sensor->Init();  // initialize the APDS
 
   // instantiate and initialize the accelerometer
   accelerometer = new ADXL345();

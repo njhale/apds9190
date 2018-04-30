@@ -9,6 +9,7 @@
 
 // register names
 #define APDS9190_ENABLE_REG (0x00 | 0x80)  // enable of states and interrupts
+#define APDS9190_ATIME_REG (0x01 | 0x80)  // a time
 #define APDS9190_PTIME_REG (0x02 | 0x80)  // proximity ADC time
 #define APDS9190_WTIME_REG (0x03 | 0x80)  // wait time
 #define APDS9190_PILTL_REG (0x08 | 0x80)  // proximity interrupt low threshold low byte
@@ -45,7 +46,15 @@ public:
    */
   uint8_t ReadFromRegister(byte reg);
 
-  void ReadWordFromRegister(byte reg);
+  /**
+   * @brief Reads a variable length amount of bytes from the given register into
+   *        the given buffer
+   *
+   * @param  reg       Address of the register to read data from
+   * @param  num_bytes Number of bytes to read from the given register
+   * @param  buffer    Buffer to store the read data
+   */
+  uint8_t ReadBlockFromRegister(byte reg, int num_bytes, byte* buffer);
 
   /**
    * @breif Reads a 16 bit word from the given register
@@ -61,7 +70,7 @@ public:
    * @param apds_fet Fet pin used to power the APDS9190
    * @return True if the initialization was successful. False otherwise.
    */
-  bool Init(uint8_t apds_fet);
+  bool Init();
 
   void PrintBits(byte b);
 
